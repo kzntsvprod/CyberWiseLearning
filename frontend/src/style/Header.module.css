@@ -1,0 +1,92 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100%;
+    padding-left: 20px;
+    position: relative;
+    gap: 10px;
+}
+
+.logoCont {
+    position: relative;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 28px;
+}
+
+.logo {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+}
+
+.searchBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    background-color: #323743FF;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.searchIcon {
+    color: #BDC1CAFF;
+    margin-right: 5px;
+}
+
+.searchBar input {
+    background: none;
+    border: none;
+    outline: none;
+    color: #BDC1CAFF;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.iconButton {
+    background: #323743FF;
+    border: none;
+    border-radius: 10px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #BDC1CAFF;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.iconUser {
+    background: #323743FF;
+    border: none;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #BDC1CAFF;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.onlineDot {
+    position: absolute;
+    bottom: 1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
+    background-color: #1DD75BFF;
+    border-radius: 100%;
+}
