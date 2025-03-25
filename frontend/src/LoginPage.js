@@ -8,6 +8,7 @@ import Input from "./components/Input";
 import Button from "./components/Button";
 import LogoCont from "./components/LogoCont";
 import Footer from "./components/Footer";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
     return (
@@ -51,7 +52,10 @@ function LoginPage() {
                                     <Button title={"Увійти"}/>
                                 </div>
                                 <div className={style.reg}>
-                                    Не маєте облікового запису?&nbsp;<b>Зареєструватися</b>
+                                    Не маєте облікового запису?&nbsp;
+                                    <Link to={"/register"} className={style.regLink}>
+                                        <b>Зареєструватися</b>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

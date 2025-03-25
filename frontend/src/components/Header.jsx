@@ -10,7 +10,7 @@ const Header = (props) => {
             </div>
 
             {props.showMenu && (
-                <> {/* Фрагмент для обгортки */}
+                <> {}
                     <div className={style.searchBar}>
                         <FaSearch className={style.searchIcon} />
                         <input type="text" />

@@ -55,7 +55,7 @@
 .text {
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     height: 23%;
 }
 
@@ -117,13 +117,13 @@
 }
 
 .checkbox:checked::after {
-    content: '✓'; /* додаємо галочку */
+    content: '✓';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white; /* колір галочки */
-    font-size: 10px; /* розмір галочки */
+    color: white;
+    font-size: 10px;
 }
 
 .label {
@@ -152,6 +152,11 @@
     font-family: Inter-Regular, sans-serif;
     color: #171A1FFF;
     height: 13.33%;
+}
+
+.regLink {
+    text-decoration: none;
+    color: black;
 }
 
 .footer {
