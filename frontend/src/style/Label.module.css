@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'SpaceAgeCyrillic';
+    src: url('../assets/fonts/SpaceAgeCyrillic-Regular(Ukrainian).ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.title {
+    font-family: 'SpaceAgeCyrillic', sans-serif;
+    font-weight: 400;
+}
