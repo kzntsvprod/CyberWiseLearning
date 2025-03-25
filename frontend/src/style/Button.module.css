@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Inter-Regular';
+    src: url('../assets/fonts/Inter-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.buttonCont {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    height: 100%;
+}
+
+.button {
+    font-family: 'Inter-Regular', sans-serif;
+    border: none;
+    width: 70%;
+    height: 60%;
+    border-radius: 16px;
+    color: white;
+    background: #171A1FFF;
+    cursor: pointer;
+}
