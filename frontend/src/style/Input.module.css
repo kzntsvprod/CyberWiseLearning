@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'Inter-SemiBold';
+    src: url('../assets/fonts/Inter-SemiBold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    width: 100%;
+}
+
+.inputLabel {
+    font-family: 'Inter-SemiBold', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #171A1FFF;
+    margin-bottom: 5px;
+}
+
+.inputWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    background-color: #F3F4F6FF;
+    padding: 8px 12px;
+    border-radius: 10px;
+    width: 93%;
+    height: 20px;
+}
+
+.inputIcon {
+    color: #171A1FFF;
+    margin-right: 8px;
+}
+
+.inputField {
+    border: none;
+    outline: none;
+    background: none;
+    flex: 1;
+    font-size: 16px;
+    color: #171A1FFF;
+}
+
+.inputField::placeholder {
+    font-family: 'Inter-SemiBold', sans-serif;
+    color: #BDC1CAFF;
+}
+
+.togglePassword {
+    border: none;
+    height: 100%;
+    cursor: pointer;
+}
