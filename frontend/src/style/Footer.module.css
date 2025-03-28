@@ -22,6 +22,11 @@
 .icon {
     cursor: pointer;
     color: #DEE1E6FF;
+    transition: transform 0.3s ease-in-out;
+}
+
+.icon:hover {
+    transform: translateY(-2px);
 }
 
 .credits {

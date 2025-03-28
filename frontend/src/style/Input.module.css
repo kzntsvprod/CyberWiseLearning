@@ -44,6 +44,15 @@
     flex: 1;
     font-size: 16px;
     color: #171A1FFF;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    opacity: 0.7;
+    transform: translateY(2px);
+}
+
+.inputField:focus,
+.inputField:not(:placeholder-shown) {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .inputField::placeholder {
