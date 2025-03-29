@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./style/LoginPage.module.css";
 import Header from "./components/Header";
 import logo from "./assets/logo.png";
@@ -11,6 +11,44 @@ import Footer from "./components/Footer";
 import { Link } from "react-router-dom";
 
 function LoginPage() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const validatePassword = (password) => {
+        const minLength = 8;
+        const hasNumber = /\d/.test(password);
+        const hasLetter = /[a-zA-Z]/.test(password);
+        return password.length >= minLength && hasNumber && hasLetter;
+    };
+
+    const handleLogin = async () => {
+        if (!validatePassword(password)) {
+            alert("Пароль має містити не менше 8 символів, включати цифри та літери.");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:5000/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Помилка авторизації");
+            }
+
+            console.log("JWT Token:", data.token); // Вивід токена у консоль
+            sessionStorage.setItem("token", data.token);
+        } catch (err) {
+            alert(err.message); // Вивід помилки у вигляді alert
+        }
+    };
+
     return (
         <div className={style.loginPage}>
             <div className={style.header}>
@@ -29,8 +67,10 @@ function LoginPage() {
                                 </div>
                                 <div className={style.inputCont}>
                                     <div className={style.inputCont2}>
-                                        <Input type={"email"} label={"Адреса електронної пошти"} placeholder={"Введіть електронну адресу"}/>
-                                        <Input type={"password"} label={"Пароль"} placeholder={"Введіть пароль"}/>
+                                        <Input type={"email"} label={"Адреса електронної пошти"} placeholder={"Введіть електронну адресу"} value={email}
+                                               onChange={(e) => setEmail(e.target.value)}/>
+                                        <Input type={"password"} label={"Пароль"} placeholder={"Введіть пароль"} value={password}
+                                               onChange={(e) => setPassword(e.target.value)}/>
                                     </div>
                                 </div>
                                 <div className={style.infoCont}>
@@ -49,7 +89,7 @@ function LoginPage() {
                                     </div>
                                 </div>
                                 <div className={style.button}>
-                                    <Button title={"Увійти"}/>
+                                    <Button title={"Увійти"} onClick={handleLogin} />
                                 </div>
                                 <div className={style.reg}>
                                     Не маєте облікового запису?&nbsp;

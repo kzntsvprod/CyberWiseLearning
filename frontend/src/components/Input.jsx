@@ -6,7 +6,7 @@ const Input = (props) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
-      setShowPassword(!showPassword);
+        setShowPassword(!showPassword);
     };
 
     return (
@@ -15,8 +15,13 @@ const Input = (props) => {
             <div className={style.inputWrapper}>
                 {props.type === "email" && <Mail className={style.inputIcon} size={20} />}
                 {props.type === "password" && <Lock className={style.inputIcon} size={20} />}
-                <input type={props.type === "password" && !showPassword ? "password" : "text"}
-                       className={style.inputField} placeholder={props.placeholder}/>
+                <input
+                    type={props.type === "password" && !showPassword ? "password" : "text"}
+                    className={style.inputField}
+                    placeholder={props.placeholder}
+                    value={props.value}
+                    onChange={props.onChange}
+                />
                 {props.type === "password" && (
                     <button
                         type="button"
@@ -29,6 +34,6 @@ const Input = (props) => {
             </div>
         </div>
     );
-}
+};
 
 export default Input;
