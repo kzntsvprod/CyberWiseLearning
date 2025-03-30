@@ -8,9 +8,12 @@ import Input from "./components/Input";
 import Button from "./components/Button";
 import LogoCont from "./components/LogoCont";
 import Footer from "./components/Footer";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import { useUser } from "./contexts/UserContext";
 
 function LoginPage() {
+    const { loginUser } = useUser();
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -42,8 +45,8 @@ function LoginPage() {
                 throw new Error(data.message || "Помилка авторизації");
             }
 
-            console.log("JWT Token:", data.token); // Вивід токена у консоль
-            sessionStorage.setItem("token", data.token);
+            await loginUser(data.token);
+            navigate('/main');
         } catch (err) {
             alert(err.message); // Вивід помилки у вигляді alert
         }
