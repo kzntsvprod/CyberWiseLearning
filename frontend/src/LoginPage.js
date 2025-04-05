@@ -17,20 +17,18 @@ function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const validatePassword = (password) => {
-        const minLength = 8;
-        const hasNumber = /\d/.test(password);
-        const hasLetter = /[a-zA-Z]/.test(password);
-        return password.length >= minLength && hasNumber && hasLetter;
-    };
-
     const handleLogin = async () => {
-        if (!validatePassword(password)) {
-            alert("Пароль має містити не менше 8 символів, включати цифри та літери.");
-            return;
-        }
-
         try {
+            if(!password) {
+                alert("Введіть свої дані!");
+                return;
+            }
+
+            if(!email) {
+                alert("Введіть свої дані!");
+                return;
+            }
+
             const response = await fetch("http://localhost:5000/api/auth/login", {
                 method: "POST",
                 headers: {
@@ -87,7 +85,9 @@ function LoginPage() {
                                             </div>
                                         </div>
                                         <div className={style.passwordRec}>
-                                            Забули пароль?
+                                            <Link to="/forgot-password" className={style.forgotPasswordLink}>
+                                                Забули пароль?
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

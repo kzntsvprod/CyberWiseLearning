@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import style from "./style/RegisterPage.module.css";
 import Header from "./components/Header";
 import logo from "./assets/logo.png";
@@ -9,10 +10,13 @@ import Button from "./components/Button";
 import LogoCont from "./components/LogoCont";
 import Footer from "./components/Footer";
 import BackButton from "./components/BackButton";
+import {useUser} from "./contexts/UserContext";
 
 function RegisterPage() {
+    const { loginUser } = useUser();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const validatePassword = (password) => {
         const minLength = 8;
@@ -23,13 +27,23 @@ function RegisterPage() {
 
     // Функція для відправки форми
     const handleRegister = async (e) => {
-        if (!validatePassword(password)) {
-            alert("Пароль має містити не менше 8 символів, включати цифри та літери.");
-            return;
-        }
-
         e.preventDefault(); // Перешкоджаємо стандартній поведінці форми
         try {
+            if(!password) {
+                alert("Введіть свої дані!");
+                return;
+            }
+
+            if(!email) {
+                alert("Введіть свої дані!");
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                alert("Пароль має містити не менше 8 символів, включати цифри та літери.");
+                return;
+            }
+
             const response = await fetch("http://localhost:5000/api/auth/register", {
                 method: "POST",
                 headers: {
@@ -42,7 +56,9 @@ function RegisterPage() {
 
             if (response.ok) {
                 // Успіх, перехід на іншу сторінку чи інша логіка
-                console.log("User registered:", data);
+                alert("Користувач успішно зареєстрований");
+                await loginUser(data.token);
+                setTimeout(() => navigate("/main"), 1000);
             } else {
                 alert(data.message); // Вивести помилку, якщо реєстрація не вдалася
             }

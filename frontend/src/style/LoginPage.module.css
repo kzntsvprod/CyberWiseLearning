@@ -140,6 +140,11 @@
     font-size: 12px;
 }
 
+.forgotPasswordLink {
+    text-decoration: none;
+    color: black;
+}
+
 .button {
     height: 13.33%;
 }
