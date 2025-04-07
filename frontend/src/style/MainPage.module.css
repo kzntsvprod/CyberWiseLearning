@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'Inter-Regular';
+    src: url('../assets/fonts/Inter-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.mainPage {
+    position: relative;
+    background-image: url("../assets/star_sky.jpg");
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+}
+
+.header {
+    position: absolute;
+    height: 11%;
+    z-index: 2;
+}
+
+.main {
+    display: flex;
+    height: 89%;
+    position: relative;
+}
+
+.leftColumn {
+    width: 78%;
+    z-index: 1;
+}
+
+.middleColumn {
+    position: absolute;
+    top: 12%;
+    left: 1%;
+    right: 1%;
+    height: 100%;
+    z-index: 1;
+}
+
+.mainPagePanel {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.mainPagePanel2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95%;
+    width: 75%;
+    background-color: white;
+    border-radius: 24px;
+    background-image: url("../assets/logo3.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 450px auto;
+}
+
+.infoCont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 49.75%;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 90%;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    height: 80%;
+    text-align: justify;
+    line-height: 1.5;
+    text-indent: 30px;
+    font-family: Inter-Regular, sans-serif;
+}
+
+.separator {
+    width: 0.5%;
+    height: 100%;
+    background-color: #565D6DFF;
+}
+
+.modListCont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 450px;
+    width: 49.75%;
+    overflow-y: auto;
+}
+
+.modList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 90%;
+    height: 95%;
+    gap: 10px;
+}
+
+.moduleItem {
+    font-size: 10px;
+}
+
+.rightColumn {
+    width: 20%;
+    display: flex;
+    align-items: start;
+    justify-content: end;
+    transform: scaleX(-1);
+}
+
+.logoCont {
+    transform: rotate(90deg);
+}
