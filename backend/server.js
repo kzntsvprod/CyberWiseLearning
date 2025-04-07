@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import authRoutes from "./routes/AuthRoutes.js";
+import moduleRoutes from "./routes/ModuleRoutes.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ mongoose.connect(process.env.MONGO_URI, {
     .catch((error) => console.log("MongoDB Connection Error:", error));
 
 app.use("/api/auth", authRoutes);
+app.use("/api/modules", moduleRoutes);
 
 app.get("/", (req, res) => {
     res.send("Backend is running...");
