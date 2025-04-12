@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useModule } from "./contexts/ModuleContext";
 import style from "./style/MainPage.module.css";
 import Header from "./components/Header";
@@ -9,6 +10,7 @@ import logo2 from "./assets/logo2.png";
 
 function MainPage() {
     const { modules } = useModule();
+    const navigate = useNavigate();
 
     return (
         <div className={style.mainPage}>
@@ -41,7 +43,7 @@ function MainPage() {
                             <div className={style.modListCont}>
                                 <div className={style.modList}>
                                     {modules.map((mod) => (
-                                        <div key={mod._id} className={style.moduleItem}>
+                                        <div key={mod._id} className={style.moduleItem} onClick={() => navigate(`/learn/${mod._id}`)}>
                                             <Label title={mod.title} />
                                         </div>
                                     ))}
