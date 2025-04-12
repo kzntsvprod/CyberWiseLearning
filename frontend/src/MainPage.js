@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useModule } from "./contexts/ModuleContext";
 import style from "./style/MainPage.module.css";
@@ -11,15 +11,29 @@ import logo2 from "./assets/logo2.png";
 function MainPage() {
     const { modules } = useModule();
     const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredModules, setFilteredModules] = useState(modules);
+
+    useEffect(() => {
+        // Фільтрація модулів на основі searchQuery
+        if (searchQuery === "") {
+            setFilteredModules(modules); // Якщо пошук порожній, вивід всіх модулів
+        } else {
+            setFilteredModules(
+                modules.filter((mod) =>
+                    mod.title.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+            );
+        }
+    }, [searchQuery, modules]); // Перерахування, коли змінюється searchQuery або modules
 
     return (
         <div className={style.mainPage}>
             <div className={style.header}>
-                <Header src={logo} showMenu={true}/>
+                <Header src={logo} showMenu={true} setSearchQuery={setSearchQuery} />
             </div>
             <div className={style.main}>
-                <div className={style.leftColumn}>
-                </div>
+                <div className={style.leftColumn}></div>
                 <div className={style.middleColumn}>
                     <div className={style.mainPagePanel}>
                         <div className={style.mainPagePanel2}>
@@ -37,16 +51,22 @@ function MainPage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className={style.separator}>
-
-                            </div>
+                            <div className={style.separator}></div>
                             <div className={style.modListCont}>
                                 <div className={style.modList}>
-                                    {modules.map((mod) => (
-                                        <div key={mod._id} className={style.moduleItem} onClick={() => navigate(`/learn/${mod._id}`)}>
-                                            <Label title={mod.title} />
-                                        </div>
-                                    ))}
+                                    {filteredModules.length === 0 ? (
+                                        <div></div>
+                                    ) : (
+                                        filteredModules.map((mod) => (
+                                            <div
+                                                key={mod._id}
+                                                className={style.moduleItem}
+                                                onClick={() => navigate(`/learn/${mod._id}`)}
+                                            >
+                                                <Label title={mod.title} />
+                                            </div>
+                                        ))
+                                    )}
                                 </div>
                             </div>
                         </div>

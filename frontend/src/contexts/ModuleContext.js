@@ -6,6 +6,7 @@ export const ModuleProvider = ({ children }) => {
     const [modules, setModules] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
     const [module, setModule] = useState(null);
     const [moduleLoading, setModuleLoading] = useState(false);
@@ -26,6 +27,10 @@ export const ModuleProvider = ({ children }) => {
                 setLoading(false);
             });
     }, []);
+
+    const filteredModules = modules.filter(module =>
+        module.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     const setModuleById = (id) => {
         setModuleLoading(true);
@@ -48,9 +53,11 @@ export const ModuleProvider = ({ children }) => {
     return (
         <ModuleContext.Provider
             value={{
-                modules,
+                modules: filteredModules,
                 loading,
                 error,
+                searchQuery,
+                setSearchQuery,
                 module,
                 moduleLoading,
                 moduleError,
