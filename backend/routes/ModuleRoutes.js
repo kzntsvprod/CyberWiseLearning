@@ -1,8 +1,9 @@
 import express from "express";
-import { getModules} from "../controllers/ModuleController.js";
+import {getModuleById, getModules} from "../controllers/ModuleController.js";
 
 const router = express.Router();
 
-router.get("/", getModules);
+router.get("/data", getModules);
+router.get("/data/:id", getModuleById)
 
 export default router;

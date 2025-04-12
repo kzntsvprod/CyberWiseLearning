@@ -7,6 +7,7 @@ import {UserProvider} from "./contexts/UserContext";
 import {ModuleProvider} from "./contexts/ModuleContext";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPasswordPage";
+import LearnPage from "./LearnPage";
 
 function Paths() {
   return (
@@ -19,6 +20,7 @@ function Paths() {
                     <Route path={"/main"} element={<MainPage />} />
                     <Route path="/forgot-password" element={<ForgotPasswordPage />} />
                     <Route path={"/reset-password/:token"} element={<ResetPasswordPage />} />
+                    <Route path={"/learn/:id"} element={<LearnPage />} />
                 </Routes>
             </Router>
         </ModuleProvider>
