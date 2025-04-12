@@ -120,6 +120,7 @@
 
 .moduleItem {
     font-size: 10px;
+    cursor: pointer;
 }
 
 .rightColumn {

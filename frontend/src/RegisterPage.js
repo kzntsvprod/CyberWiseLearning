@@ -104,7 +104,7 @@ function RegisterPage() {
                                         </div>
                                     </div>
                                     <div className={style.button}>
-                                        <Button title={"Зареєструватися"} onClick={handleRegister}/>
+                                        <Button title={"Зареєструватися"} onClick={handleRegister} backgroundColor={"#171A1FFF"} color={"white"} alignItems={"start"} />
                                     </div>
                                 </div>
                                 <div className={style.rightColumn2}></div>

@@ -92,7 +92,7 @@ function LoginPage() {
                                     </div>
                                 </div>
                                 <div className={style.button}>
-                                    <Button title={"Увійти"} onClick={handleLogin} />
+                                    <Button title={"Увійти"} onClick={handleLogin} backgroundColor={"#171A1FFF"} color={"white"} alignItems={"start"} />
                                 </div>
                                 <div className={style.reg}>
                                     Не маєте облікового запису?&nbsp;
