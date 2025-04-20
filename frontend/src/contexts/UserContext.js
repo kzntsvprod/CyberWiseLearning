@@ -8,9 +8,18 @@ export const UserProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const loginUser = async (token) => {
+    const getToken = () => {
+        return localStorage.getItem('token') || sessionStorage.getItem('token');
+    };
+
+    const loginUser = async (token, rememberMe = false) => {
         try {
-            sessionStorage.setItem('token', token);
+            // Зберігаємо токен у вибране сховище
+            if (rememberMe) {
+                localStorage.setItem('token', token);
+            } else {
+                sessionStorage.setItem('token', token);
+            }
             await fetchUserData();
         } catch (err) {
             setError(err.message);
@@ -19,6 +28,7 @@ export const UserProvider = ({ children }) => {
     };
 
     const logoutUser = () => {
+        localStorage.removeItem('token');
         sessionStorage.removeItem('token');
         setUser(null);
     };
@@ -28,13 +38,12 @@ export const UserProvider = ({ children }) => {
             setLoading(true);
             setError(null);
 
-            const token = sessionStorage.getItem('token');
+            const token = getToken();
             if (!token) {
                 setLoading(false);
                 return;
             }
 
-            // Перевіряємо чи токен валідний
             const decoded = jwtDecode(token);
             if (decoded.exp * 1000 < Date.now()) {
                 throw new Error('Токен протерміновано');
@@ -60,7 +69,7 @@ export const UserProvider = ({ children }) => {
 
     const updateUser = async (updatedData) => {
         try {
-            const token = sessionStorage.getItem('token');
+            const token = getToken();
             if (!token) throw new Error('Токен не знайдено');
 
             const response = await fetch('http://localhost:5000/api/user/update', {
@@ -73,7 +82,6 @@ export const UserProvider = ({ children }) => {
             });
 
             const data = await response.json();
-
             if (!response.ok) {
                 alert(data.message || "Помилка зміни електронної адреси");
                 throw new Error(data.message || "Помилка зміни електронної адреси");
@@ -88,7 +96,7 @@ export const UserProvider = ({ children }) => {
 
     const updateAvatar = async (file) => {
         try {
-            const token = sessionStorage.getItem('token');
+            const token = getToken();
             if (!token) throw new Error('Токен не знайдено');
 
             const formData = new FormData();

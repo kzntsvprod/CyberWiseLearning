@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./style/LoginPage.module.css";
 import Header from "./components/Header";
 import logo from "./assets/logo.png";
@@ -16,15 +16,19 @@ function LoginPage() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [rememberMe, setRememberMe] = useState(false);
+
+    useEffect(() => {
+        // Перевірка наявності токена у localStorage при завантаженні сторінки
+        const savedToken = localStorage.getItem('token');
+        if (savedToken) {
+            loginUser(savedToken);
+        }
+    }, [loginUser, navigate]);
 
     const handleLogin = async () => {
         try {
-            if(!password) {
-                alert("Введіть свої дані!");
-                return;
-            }
-
-            if(!email) {
+            if (!password || !email) {
                 alert("Введіть свої дані!");
                 return;
             }
@@ -43,11 +47,21 @@ function LoginPage() {
                 throw new Error(data.message || "Помилка авторизації");
             }
 
-            await loginUser(data.token);
+            await loginUser(data.token, rememberMe);
+
+            // Якщо користувач вибрав "Залишитись у системі", зберігаємо токен у localStorage
+            if (rememberMe) {
+                localStorage.setItem("authToken", data.token);
+            }
+
             navigate('/main');
         } catch (err) {
-            alert(err.message); // Вивід помилки у вигляді alert
+            alert(err.message);
         }
+    };
+
+    const handleRememberMeChange = () => {
+        setRememberMe(!rememberMe);
     };
 
     return (
@@ -78,7 +92,8 @@ function LoginPage() {
                                     <div className={style.info}>
                                         <div className={style.save}>
                                             <div className={style.checkboxCont}>
-                                                <input type={"checkbox"} className={style.checkbox}/>
+                                                <input type={"checkbox"} className={style.checkbox} checked={rememberMe}
+                                                       onChange={handleRememberMeChange}/>
                                             </div>
                                             <div className={style.label}>
                                                 Залишитись у системі
@@ -107,9 +122,7 @@ function LoginPage() {
                         <Footer />
                     </div>
                 </div>
-                <div className={style.rightColumn}>
-
-                </div>
+                <div className={style.rightColumn}></div>
             </div>
         </div>
     );
