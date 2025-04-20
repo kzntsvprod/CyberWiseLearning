@@ -86,7 +86,7 @@ function ResetPasswordPage() {
                                         </div>
                                     </div>
                                     <div className={style.button}>
-                                        <Button title={"Змінити пароль"} onClick={handleResetPassword}/>
+                                        <Button title={"Змінити пароль"} onClick={handleResetPassword} backgroundColor={"#171A1FFF"} color={"white"} alignItems={"start"} />
                                     </div>
                                 </div>
                                 <div className={style.rightColumn2}></div>

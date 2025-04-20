@@ -70,7 +70,7 @@ function ForgotPasswordPage() {
                                         </div>
                                     </div>
                                     <div className={style.button}>
-                                        <Button title={"Надіслати"} onClick={handleResetRequest} />
+                                        <Button title={"Надіслати"} onClick={handleResetRequest} backgroundColor={"#171A1FFF"} color={"white"} alignItems={"start"} />
                                     </div>
                                 </div>
                                 <div className={style.rightColumn2}></div>
