@@ -66,6 +66,27 @@
     cursor: pointer;
 }
 
+.userAvatarCont {
+    border: none;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #BDC1CAFF;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.userAvatar {
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+}
+
 .iconUser {
     background: #323743FF;
     border: none;

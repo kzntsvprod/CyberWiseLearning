@@ -58,6 +58,62 @@ export const UserProvider = ({ children }) => {
         }
     };
 
+    const updateUser = async (updatedData) => {
+        try {
+            const token = sessionStorage.getItem('token');
+            if (!token) throw new Error('Токен не знайдено');
+
+            const response = await fetch('http://localhost:5000/api/user/update', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify(updatedData)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(data.message || "Помилка зміни електронної адреси");
+                throw new Error(data.message || "Помилка зміни електронної адреси");
+            }
+
+            setUser(prev => ({ ...prev, ...updatedData }));
+        } catch (err) {
+            setError(err.message);
+            throw err;
+        }
+    };
+
+    const updateAvatar = async (file) => {
+        try {
+            const token = sessionStorage.getItem('token');
+            if (!token) throw new Error('Токен не знайдено');
+
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            const response = await fetch('http://localhost:5000/api/user/avatar', {
+                method: 'POST',
+                headers: {
+                    'Authorization': token
+                },
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Помилка завантаження аватарки');
+            }
+
+            const data = await response.json();
+            setUser(prev => ({ ...prev, avatar: data.avatar }));
+        } catch (err) {
+            setError(err.message);
+            throw err;
+        }
+    };
+
     useEffect(() => {
         fetchUserData();
     }, []);
@@ -69,7 +125,9 @@ export const UserProvider = ({ children }) => {
             error,
             loginUser,
             logoutUser,
-            refetchUser: fetchUserData
+            refetchUser: fetchUserData,
+            updateUser,
+            updateAvatar
         }}>
             {children}
         </UserContext.Provider>

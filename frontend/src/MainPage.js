@@ -7,12 +7,38 @@ import Label from "./components/Label";
 import logo from "./assets/logo.png";
 import LogoCont from "./components/LogoCont";
 import logo2 from "./assets/logo2.png";
+import { useUser } from "./contexts/UserContext";
 
 function MainPage() {
     const { modules } = useModule();
+    const { user } = useUser();
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredModules, setFilteredModules] = useState(modules);
+
+    const handleModuleClick = async (modId) => {
+        try {
+            const response = await fetch("http://localhost:5000/api/user/view-module", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: user._id,
+                    moduleId: modId,
+                }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Помилка сервера");
+            }
+
+            navigate(`/learn/${modId}`);
+        } catch (err) {
+            console.error("Помилка при оновленні прогресу:", err);
+        }
+    };
 
     useEffect(() => {
         // Фільтрація модулів на основі searchQuery
@@ -61,7 +87,7 @@ function MainPage() {
                                             <div
                                                 key={mod._id}
                                                 className={style.moduleItem}
-                                                onClick={() => navigate(`/learn/${mod._id}`)}
+                                                onClick={() => handleModuleClick(mod._id)}
                                             >
                                                 <Label title={mod.title} />
                                             </div>
