@@ -66,6 +66,38 @@
     cursor: pointer;
 }
 
+.gameWrapper {
+    position: relative;
+}
+
+.gameMenu {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gameMenu button {
+    background: none;
+    border: none;
+    padding: 6px 10px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.gameMenu button:hover {
+    background-color: #f0f0f0;
+}
+
 .userAvatarCont {
     border: none;
     border-radius: 100%;

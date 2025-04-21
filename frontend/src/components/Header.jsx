@@ -7,8 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 const Header = (props) => {
     const { searchQuery, setSearchQuery } = useModule();
-    const { user, updateAvatar } = useUser();
+    const { user } = useUser();
     const navigate = useNavigate();
+    const [showGameMenu, setShowGameMenu] = useState(false);
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
@@ -21,6 +22,19 @@ const Header = (props) => {
     const handleMainClick = () => {
         navigate("/main");
     }
+
+    const toggleGameMenu = () => {
+        setShowGameMenu(prev => !prev);
+    };
+
+    const handleGameOption = (option) => {
+        setShowGameMenu(false);
+        if (option === "password") {
+            navigate("/game/password");
+        } else if (option === "email") {
+            navigate("/game/email");
+        }
+    };
 
     return (
         <div className={style.header}>
@@ -44,13 +58,23 @@ const Header = (props) => {
                         <button className={style.iconButton} onClick={handleMainClick}>
                             <FaHome />
                         </button>
-                        <button className={style.iconButton}>
-                            <FaGamepad />
-                        </button>
+
+                        <div className={style.gameWrapper}>
+                            <button className={style.iconButton} onClick={toggleGameMenu}>
+                                <FaGamepad />
+                            </button>
+                            {showGameMenu && (
+                                <div className={style.gameMenu}>
+                                    <button onClick={() => handleGameOption("password")}>Гра з паролем</button>
+                                    <button onClick={() => handleGameOption("email")}>Гра з ел. листами</button>
+                                </div>
+                            )}
+                        </div>
+
                         {user?.avatar ? (
                             <div className={style.userAvatarCont} onClick={handleProfileClick}>
                                 <img
-                                    src={user.avatar} // Отримання URL аватарки з контексту
+                                    src={user.avatar}
                                     alt="User Avatar"
                                     className={style.userAvatar}
                                 />

@@ -9,6 +9,7 @@ import ForgotPasswordPage from "./ForgotPasswordPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 import LearnPage from "./LearnPage";
 import UserPage from "./UserPage";
+import PassGame from "./PassGame";
 
 function Paths() {
   return (
@@ -23,6 +24,7 @@ function Paths() {
                     <Route path={"/reset-password/:token"} element={<ResetPasswordPage />} />
                     <Route path={"/learn/:id"} element={<LearnPage />} />
                     <Route path={"/user"} element={<UserPage />} />
+                    <Route path={"/game/password"} element={<PassGame/>} />
                 </Routes>
             </Router>
         </ModuleProvider>
