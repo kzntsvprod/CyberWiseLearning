@@ -10,7 +10,7 @@ const Input = (props) => {
     };
 
     return (
-        <div className={style.input}>
+        <div className={style.input} style={{ alignItems: props.alignItems || "start" }}>
             <label className={style.inputLabel}>{props.label}</label>
             <div className={style.inputWrapper}>
                 {props.type === "email" && <Mail className={style.inputIcon} size={20} />}

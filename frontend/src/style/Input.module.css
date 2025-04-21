@@ -8,7 +8,6 @@
 .input {
     display: flex;
     justify-content: center;
-    align-items: start;
     flex-direction: column;
     width: 100%;
 }
