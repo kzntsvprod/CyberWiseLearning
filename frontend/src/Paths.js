@@ -10,25 +10,30 @@ import ResetPasswordPage from "./ResetPasswordPage";
 import LearnPage from "./LearnPage";
 import UserPage from "./UserPage";
 import PassGame from "./PassGame";
+import { EmailCardProvider } from "./contexts/EmailCardContext";
+import EmailGame from "./EmailGame";
 
 function Paths() {
   return (
-    <UserProvider>
-        <ModuleProvider>
-            <Router>
-                <Routes>
-                    <Route path="/" element={<LoginPage />} />
-                    <Route path={"/register"} element={<RegisterPage />} />
-                    <Route path={"/main"} element={<MainPage />} />
-                    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-                    <Route path={"/reset-password/:token"} element={<ResetPasswordPage />} />
-                    <Route path={"/learn/:id"} element={<LearnPage />} />
-                    <Route path={"/user"} element={<UserPage />} />
-                    <Route path={"/game/password"} element={<PassGame/>} />
-                </Routes>
-            </Router>
-        </ModuleProvider>
-    </UserProvider>
+    <EmailCardProvider>
+        <UserProvider>
+            <ModuleProvider>
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<LoginPage />} />
+                        <Route path={"/register"} element={<RegisterPage />} />
+                        <Route path={"/main"} element={<MainPage />} />
+                        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                        <Route path={"/reset-password/:token"} element={<ResetPasswordPage />} />
+                        <Route path={"/learn/:id"} element={<LearnPage />} />
+                        <Route path={"/user"} element={<UserPage />} />
+                        <Route path={"/game/password"} element={<PassGame/>} />
+                        <Route path={"/game/email"} element={<EmailGame/>} />
+                    </Routes>
+                </Router>
+            </ModuleProvider>
+        </UserProvider>
+    </EmailCardProvider>
   );
 }
 
