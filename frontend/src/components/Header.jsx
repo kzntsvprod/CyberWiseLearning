@@ -4,6 +4,7 @@ import { FaSearch, FaHome, FaGamepad } from "react-icons/fa";
 import { useModule } from "../contexts/ModuleContext";
 import { useUser } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import AccountPreview from "./AccountPreview";
 
 const Header = (props) => {
     const { searchQuery, setSearchQuery } = useModule();
@@ -16,7 +17,11 @@ const Header = (props) => {
     };
 
     const handleProfileClick = () => {
-        navigate("/user");
+        if (user?.role === "admin") {
+            navigate("/admin");
+        } else {
+            navigate("/user");
+        }
     }
 
     const handleMainClick = () => {
@@ -71,21 +76,7 @@ const Header = (props) => {
                             )}
                         </div>
 
-                        {user?.avatar ? (
-                            <div className={style.userAvatarCont} onClick={handleProfileClick}>
-                                <img
-                                    src={user.avatar}
-                                    alt="User Avatar"
-                                    className={style.userAvatar}
-                                />
-                                <span className={style.onlineDot}></span>
-                            </div>
-                        ) : (
-                            <button className={style.iconUser} onClick={handleProfileClick}>
-                                <span>{user?.name?.charAt(0).toUpperCase()}</span>
-                                <span className={style.onlineDot}></span>
-                            </button>
-                        )}
+                        <AccountPreview user={user} handleProfileClick={handleProfileClick} />
                     </div>
                 </>
             )}

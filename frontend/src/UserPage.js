@@ -11,7 +11,7 @@ import { useUser } from "./contexts/UserContext";
 import { useModule } from "./contexts/ModuleContext";
 import EditIcon from "./components/EditIcon";
 import Input from "./components/Input";
-import Label from "./components/Label";
+import CourseStatus from "./components/CourseStatus";
 
 function UserPage() {
     const { user, loading, updateUser, logoutUser } = useUser();
@@ -21,8 +21,6 @@ function UserPage() {
     const [inputValue, setInputValue] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
-
-    if (loading) return <div>Завантаження...</div>;
     if (!user) return <div>Будь ласка, увійдіть у систему</div>;
 
     const handleEditClick = (field) => {
@@ -163,20 +161,7 @@ function UserPage() {
                             <div className={style.separator}></div>
                             <div className={style.moduleStatus}>
                                 <div className={style.progressBarCont}>
-                                    <div className={style.progressLabel}>
-                                        <Label title={"Прогрес курсу"}/>
-                                    </div>
-                                    <div className={style.progressBar}>
-                                        <div
-                                            className={style.progressFill}
-                                            style={{
-                                                width:
-                                                    user?.viewedModules && modules.length > 0
-                                                        ? `${Math.min((user.viewedModules.length / modules.length) * 100, 100)}%`
-                                                        : "0%",
-                                            }}
-                                        ></div>
-                                    </div>
+                                    <CourseStatus user={user} modules={modules} />
                                 </div>
                             </div>
                         </div>

@@ -12,7 +12,7 @@ import logo2 from "./assets/logo2.png";
 import {useUser} from "./contexts/UserContext";
 import {useModule} from "./contexts/ModuleContext";
 import AccountPreview from "./components/AccountPreview";
-import ModuleStatus from "./components/ModuleStatus";
+import CourseStatus from "./components/CourseStatus";
 
 function AdminPage() {
     const { user, users, loading, updateUser, logoutUser } = useUser();
@@ -173,7 +173,7 @@ function AdminPage() {
                                             {user.name}
                                         </div>
                                         <div className={style.moduleStatus}>
-                                            <ModuleStatus user={user} modules={modules} />
+                                            <CourseStatus user={user} modules={modules} />
                                         </div>
                                     </div>
                                 ))}
