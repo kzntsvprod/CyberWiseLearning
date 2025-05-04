@@ -2,6 +2,13 @@ import React from "react";
 import style from "../style/AccountPreview.module.css";
 
 const AccountPreview = (props) => {
+    const user = props.user;
+
+    // Перевірка на наявність користувача
+    if (!user) {
+        return null;
+    }
+
     return props.user?.avatar ? (
         <div className={style.userAvatarCont} onClick={props.handleProfileClick}>
             <img

@@ -166,6 +166,13 @@ export const UserProvider = ({ children }) => {
     useEffect(() => {
         fetchUserData();
         fetchAllUsers();
+
+        const interval = setInterval(() => {
+            fetchUserData();
+            fetchAllUsers();
+        }, 30000);
+
+        return () => clearInterval(interval);
     }, []);
 
     return (
@@ -178,7 +185,7 @@ export const UserProvider = ({ children }) => {
             errorUsers,
             loginUser,
             logoutUser,
-            refetchUser: fetchUserData,
+            fetchUserData,
             updateUser,
             updateAvatar,
             fetchAllUsers,

@@ -11,7 +11,7 @@ import { useUser } from "./contexts/UserContext";
 
 function MainPage() {
     const { modules } = useModule();
-    const { user } = useUser();
+    const { user, fetchUserData } = useUser();
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredModules, setFilteredModules] = useState(modules);
@@ -33,6 +33,8 @@ function MainPage() {
                 const errorData = await response.json();
                 throw new Error(errorData.message || "Помилка сервера");
             }
+
+            await fetchUserData();
 
             navigate(`/learn/${modId}`);
         } catch (err) {
