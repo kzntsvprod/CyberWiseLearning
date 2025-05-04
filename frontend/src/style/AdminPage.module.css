@@ -1,0 +1,289 @@
+@font-face {
+    font-family: 'Archivo-Medium';
+    src: url('../assets/fonts/Archivo-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Archivo-Bold';
+    src: url('../assets/fonts/Archivo-Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter-SemiBold';
+    src: url('../assets/fonts/Inter-SemiBold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.adminPage {
+    position: relative;
+    background-image: url("../assets/star_sky.jpg");
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+}
+
+.header {
+    position: absolute;
+    height: 11%;
+    z-index: 2;
+}
+
+.main {
+    display: flex;
+    height: 89%;
+    position: relative;
+}
+
+.leftColumn {
+    width: 78%;
+    z-index: 1;
+}
+
+.middleColumn {
+    position: absolute;
+    top: 12%;
+    left: 1%;
+    right: 1%;
+    height: 100%;
+    z-index: 1;
+}
+
+.adminPagePanel {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.adminPagePanel2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 95%;
+    width: 75%;
+    background-color: white;
+    border-radius: 24px;
+    background-image: url("../assets/logo3.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 450px auto;
+}
+
+.adminInfoCont {
+    display: flex;
+    height: 40.5%;
+    width: 100%;
+}
+
+.backButton {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: start;
+    margin-top: 2%;
+    height: 90%;
+    width: 5%;
+}
+
+.adminInfoCont2 {
+    display: flex;
+    width: 47.5%;
+    height: 100%;
+}
+
+.adminIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+}
+
+.adminInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 55%;
+    height: 100%;
+}
+
+.adminNameCont {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    margin-bottom: 10px;
+}
+
+.editField {
+    display: flex;
+    gap: 8px;
+    align-items: end;
+    margin-top: 4px;
+}
+
+.editInput {
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.saveBtn {
+    padding: 5px 10px;
+    background-color: #171A1FFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: box-shadow 1s ease;
+}
+
+.saveBtn:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.adminName {
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    height: 100%;
+    width: 90%;
+    font-size: 22px;
+    font-family: Archivo-Bold, sans-serif;
+    color: #171A1FFF;
+}
+
+.adminEmailCont {
+    display: flex;
+    width: 100%;
+    height: 10%;
+}
+
+.editField2 {
+    display: flex;
+    gap: 8px;
+    align-items: end;
+    margin-top: 4px;
+}
+
+.adminEmail {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    height: 100%;
+    width: 90%;
+    font-size: 18px;
+    font-family: Archivo-Medium, sans-serif;
+    color: #9095A1FF;
+}
+
+.penIcon {
+    color: black;
+    font-size: 12.5px;
+}
+
+.logoutCont {
+    display: flex;
+    align-items: end;
+    justify-content: start;
+    width: 100%;
+    height: 10%;
+    gap: 10px;
+}
+
+.confirmBtn {
+    color: deepskyblue;
+    font-family: Inter-SemiBold, sans-serif;
+    cursor: pointer;
+}
+
+.logout {
+    text-decoration: none;
+    color: #DE3B40FF;
+    font-family: Inter-SemiBold, sans-serif;
+    cursor: pointer;
+}
+
+.adminPassCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 47.5%;
+    height: 100%;
+}
+
+.adminPass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+}
+
+.separator {
+    width: 100%;
+    height: 0.5%;
+    background-color: #565D6DFF;
+}
+
+.moduleStatusCont {
+    height: 59%;
+    width: 85%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.moduleStatusCont2 {
+    display: flex;
+    height: 15%;
+    width: 100%;
+    align-items: center;
+    justify-content: start;
+}
+
+.accountPreview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+    height: 100%;
+    margin-top: 20px;
+}
+
+.userName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Archivo-Bold, sans-serif;
+    width: 5%;
+    height: 100%;
+    margin-top: 20px;
+}
+
+.moduleStatus {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+}
+
+.rightColumn {
+    width: 20%;
+    display: flex;
+    align-items: start;
+    justify-content: end;
+    transform: scaleX(-1);
+}
+
+.logoCont {
+    transform: rotate(90deg);
+}

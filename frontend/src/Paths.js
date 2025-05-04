@@ -12,6 +12,7 @@ import UserPage from "./UserPage";
 import PassGame from "./PassGame";
 import { EmailCardProvider } from "./contexts/EmailCardContext";
 import EmailGame from "./EmailGame";
+import AdminPage from "./AdminPage";
 
 function Paths() {
   return (
@@ -29,6 +30,7 @@ function Paths() {
                         <Route path={"/user"} element={<UserPage />} />
                         <Route path={"/game/password"} element={<PassGame/>} />
                         <Route path={"/game/email"} element={<EmailGame/>} />
+                        <Route path={"/admin"} element={<AdminPage />} />
                     </Routes>
                 </Router>
             </ModuleProvider>
