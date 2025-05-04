@@ -122,3 +122,25 @@ export const markModuleAsViewed = async (req, res) => {
         res.status(500).json({ message: "Помилка сервера", error: err.message });
     }
 };
+
+export const getUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+export const updateUserStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { isOnline } = req.body;
+
+        await User.findByIdAndUpdate(id, { isOnline });
+
+        res.status(200).json({ message: 'Статус оновлено' });
+    } catch (err) {
+        res.status(500).json({ message: 'Помилка оновлення статусу' });
+    }
+};

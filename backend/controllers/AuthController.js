@@ -46,8 +46,8 @@ export const register = async (req, res) => {
         const newUser = new User({ email, password: hashedPassword });
         await newUser.save();
 
-        const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        res.status(201).json({ token, userId: newUser._id });
+        const token = jwt.sign({ userId: newUser._id, role: newUser.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        res.status(201).json({ token, userId: newUser._id, role: newUser.role });
     } catch (error) {
         res.status(500).json({ message: "Помилка сервера" });
     }
@@ -76,9 +76,9 @@ export const login = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: "Невірний email або пароль" });
 
         // Генерування токена
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-        res.json({ token, userId: user._id });
+        res.json({ token, userId: user._id, role: user.role });
     } catch (error) {
         res.status(500).json({ message: "Помилка сервера" });
     }
@@ -91,6 +91,7 @@ export const authMiddleware = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         req.userId = decoded.userId;
+        req.role = decoded.role;
         next();
     } catch (error) {
         res.status(403).json({ message: "Невірний токен" });
