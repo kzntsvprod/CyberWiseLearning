@@ -1,0 +1,55 @@
+.userAvatarCont {
+    border: none;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #BDC1CAFF;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.userAvatar {
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+}
+
+.iconUser {
+    background: #323743FF;
+    border: none;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #BDC1CAFF;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+}
+
+.onlineDot {
+    position: absolute;
+    bottom: 1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
+    background-color: #1DD75BFF;
+    border-radius: 100%;
+}
+
+.offlineDot {
+    position: absolute;
+    bottom: 1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
+    background-color: #BDC1CAFF;
+    border-radius: 100%;
+}
