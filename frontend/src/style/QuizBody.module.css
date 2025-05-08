@@ -1,0 +1,120 @@
+.questionBlockCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 20px;
+}
+
+.resultBox {
+    border: 1px solid #000;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    background-color: #fff;
+    color: #000;
+    width: 100%;
+    max-width: 800px;
+}
+
+.questionBlock {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.question {
+    font-size: 18px;
+    margin-bottom: 15px;
+    word-wrap: break-word;
+}
+
+.question strong {
+    font-weight: 600;
+}
+
+.question span {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+.optionLabel {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px 0;
+    line-height: 1.4;
+}
+
+.optionLabel input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.optionLabel input[type="radio"]:checked {
+    border-color: #171A1FFF;
+}
+
+.optionLabel input[type="radio"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    background: #171A1FFF;
+    border-radius: 50%;
+}
+
+.optionLabel input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.optionLabel input[type="checkbox"]:checked {
+    background-color: #171A1FFF;
+    border-color: #171A1FFF;
+}
+
+.optionLabel input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.submitButton {
+    height: 25%;
+    width: 50%;
+    margin-top: 10px;
+    flex-shrink: 0;
+}
