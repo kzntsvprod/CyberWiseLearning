@@ -12,6 +12,7 @@ import { useModule } from "./contexts/ModuleContext";
 import EditIcon from "./components/EditIcon";
 import Input from "./components/Input";
 import CourseStatus from "./components/CourseStatus";
+import ResultsView from "./components/ResultsView";
 
 function UserPage() {
     const { user, loading, updateUser, logoutUser } = useUser();
@@ -162,6 +163,9 @@ function UserPage() {
                             <div className={style.moduleStatus}>
                                 <div className={style.progressBarCont}>
                                     <CourseStatus user={user} modules={modules} />
+                                </div>
+                                <div className={style.testProgressCont}>
+                                    <ResultsView />
                                 </div>
                             </div>
                         </div>
