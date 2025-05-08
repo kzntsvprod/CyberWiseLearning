@@ -145,3 +145,26 @@ export const checkQuizCompletion = async (req, res) => {
         res.status(500).json({ error: "Помилка при перевірці завершення тесту" });
     }
 };
+
+// Отримати результати користувача по moduleId (або всі, якщо moduleId не вказано)
+export const getUserResults = async (req, res) => {
+    try {
+        const { userId, moduleId } = req.query;
+
+        if (!userId) {
+            return res.status(400).json({ error: "Відсутній userId" });
+        }
+
+        const query = { userId };
+        if (moduleId) query.moduleId = moduleId;
+
+        const results = await Result.find(query)
+            .populate('moduleId', 'title')
+            .sort({ completedAt: -1 });
+
+        res.json(results);
+    } catch (err) {
+        console.error("Помилка при отриманні результатів:", err);
+        res.status(500).json({ error: "Помилка при отриманні результатів" });
+    }
+};
