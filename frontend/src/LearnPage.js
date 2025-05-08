@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useModule } from "./contexts/ModuleContext";
 import style from "./style/LearnPage.module.css";
 import Header from "./components/Header";
@@ -20,6 +20,7 @@ const getVideoId = (url) => {
 function LearnPage() {
     const { id } = useParams();
     const { module, moduleLoading, moduleError, setModuleById } = useModule();
+    const navigate = useNavigate();
 
     const textRef = useRef(null);
     const [pages, setPages] = useState([]);
@@ -95,10 +96,30 @@ function LearnPage() {
                                     </div>
                                     <div className={style.buttonCont}>
                                         <div className={style.button1}>
-                                            <Button title={"Назад"} backgroundColor={"#DEE1E6FF"} color={"black"} alignItems={"center"} onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))} />
+                                            <Button title={"Назад"} backgroundColor={"#DEE1E6FF"} color={"black"}
+                                                    alignItems={"center"}
+                                                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}/>
                                         </div>
                                         <div className={style.button2}>
-                                            <Button title={"Далі"} backgroundColor={"#171A1FFF"} color={"white"} alignItems={"center"} onClick={() => setCurrentPage((prev) => Math.min(prev + 1, pages.length - 1))} />
+                                            {currentPage === pages.length - 1 ? (
+                                                <Button
+                                                    title={"Перейти до тестів"}
+                                                    backgroundColor={"#171A1FFF"}
+                                                    color={"white"}
+                                                    alignItems={"center"}
+                                                    onClick={() => {
+                                                        navigate(`/quiz/${id}`);
+                                                    }}
+                                                />
+                                            ) : (
+                                                <Button
+                                                    title={"Далі"}
+                                                    backgroundColor={"#171A1FFF"}
+                                                    color={"white"}
+                                                    alignItems={"center"}
+                                                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, pages.length - 1))}
+                                                />
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +129,7 @@ function LearnPage() {
                             </div>
                             <div className={style.videoCont}>
                                 <div className={style.video}>
-                                    {module.videoUrl && <YouTubePlayer videoId={getVideoId(module.videoUrl)} />}
+                                    {module.videoUrl && <YouTubePlayer videoId={getVideoId(module.videoUrl)}/>}
                                 </div>
                             </div>
                         </div>
@@ -116,7 +137,7 @@ function LearnPage() {
                 </div>
                 <div className={style.rightColumn}>
                     <div className={style.logoCont}>
-                        <LogoCont src={logo2}/>
+                    <LogoCont src={logo2}/>
                     </div>
                 </div>
             </div>
