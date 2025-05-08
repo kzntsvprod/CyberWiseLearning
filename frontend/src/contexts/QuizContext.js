@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
+import React, { createContext, useContext, useState, useCallback } from "react";
 
 const QuizContext = createContext();
 
@@ -9,6 +9,9 @@ export const QuizProvider = ({ children }) => {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [userResults, setUserResults] = useState([]);
+    const [resultsLoading, setResultsLoading] = useState(false);
+    const [selectedModuleResults, setSelectedModuleResults] = useState(null);
 
     const fetchQuiz = useCallback((moduleId) => {
         setLoading(true);
@@ -34,6 +37,45 @@ export const QuizProvider = ({ children }) => {
                 setError(err);
                 setLoading(false);
             });
+    }, []);
+
+    const fetchUserResults = useCallback(async (userId, moduleId = null) => {
+        setResultsLoading(true);
+        setError(null);
+        try {
+            let url = `http://localhost:5000/api/quiz/results?userId=${userId}`;
+            if (moduleId) url += `&moduleId=${moduleId}`;
+
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("Error fetching results");
+            const data = await res.json();
+            setUserResults(data);
+
+            // Якщо вибрано конкретний модуль, зберігаємо його результати окремо
+            if (moduleId) {
+                setSelectedModuleResults(data);
+            } else {
+                setSelectedModuleResults(null);
+            }
+        } catch (err) {
+            setError(err);
+        } finally {
+            setResultsLoading(false);
+        }
+    }, []);
+
+    const checkQuizCompletion = useCallback(async (userId, moduleId) => {
+        try {
+            const res = await fetch(
+                `http://localhost:5000/api/quiz/check-completion?userId=${userId}&moduleId=${moduleId}`
+            );
+            if (!res.ok) throw new Error("Error checking quiz completion");
+            const data = await res.json();
+            return data.completed;
+        } catch (err) {
+            setError(err);
+            return false;
+        }
     }, []);
 
     const handleSelect = (questionIndex, answerIndex) => {
@@ -72,6 +114,8 @@ export const QuizProvider = ({ children }) => {
             const data = await res.json();
             setResult(data);
             setSubmitted(true);
+
+            await fetchUserResults(userId);
         } catch (err) {
             setError(err);
         }
@@ -86,10 +130,15 @@ export const QuizProvider = ({ children }) => {
                 result,
                 loading,
                 error,
+                userResults,
+                resultsLoading,
+                selectedModuleResults,
                 fetchQuiz,
                 handleSelect,
                 handleMultipleSelect,
                 submitQuiz,
+                fetchUserResults,
+                checkQuizCompletion,
             }}
         >
             {children}
