@@ -6,6 +6,7 @@ import authRoutes from "./routes/AuthRoutes.js";
 import moduleRoutes from "./routes/ModuleRoutes.js";
 import userRoutes from "./routes/UserRoutes.js";
 import emailCardRoute from "./routes/EmailCardRoute.js";
+import quizRoutes from "./routes/QuizRoutes.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/modules", moduleRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/cards", emailCardRoute);
+app.use("/api/quiz", quizRoutes);
 
 app.get("/", (req, res) => {
     res.send("Backend is running...");
