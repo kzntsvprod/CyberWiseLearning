@@ -58,7 +58,7 @@ function MainPage() {
     return (
         <div className={style.mainPage}>
             <div className={style.header}>
-                <Header src={logo} showMenu={true} setSearchQuery={setSearchQuery} />
+                <Header src={logo} showMenu={true} setSearchQuery={setSearchQuery} showSearch={true} />
             </div>
             <div className={style.main}>
                 <div className={style.leftColumn}></div>

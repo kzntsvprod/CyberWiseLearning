@@ -165,7 +165,7 @@ function UserPage() {
                                     <CourseStatus user={user} modules={modules} />
                                 </div>
                                 <div className={style.testProgressCont}>
-                                    <ResultsView />
+                                    <ResultsView userId={user._id} />
                                 </div>
                             </div>
                         </div>
