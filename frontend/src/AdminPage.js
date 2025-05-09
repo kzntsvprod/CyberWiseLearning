@@ -13,6 +13,7 @@ import {useUser} from "./contexts/UserContext";
 import {useModule} from "./contexts/ModuleContext";
 import AccountPreview from "./components/AccountPreview";
 import CourseStatus from "./components/CourseStatus";
+import ResultsView from "./components/ResultsView";
 
 function AdminPage() {
     const { user, users, loading, updateUser, logoutUser } = useUser();
@@ -22,6 +23,8 @@ function AdminPage() {
     const [inputValue, setInputValue] = useState("");
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
+    const [selectedUserId, setSelectedUserId] = useState(null);
+
     if (!user) return <div>Будь ласка, увійдіть у систему</div>;
 
     const handleEditClick = (field) => {
@@ -81,10 +84,14 @@ function AdminPage() {
         }
     };
 
+    const handleUserSelect = (userId) => {
+        setSelectedUserId(userId === selectedUserId ? null : userId);
+    };
+
     return (
         <div className={style.adminPage}>
             <div className={style.header}>
-                <Header src={logo} showMenu={true}/>
+                <Header src={logo} showMenu={true} />
             </div>
             <div className={style.main}>
                 <div className={style.leftColumn}></div>
@@ -165,16 +172,27 @@ function AdminPage() {
                             <div className={style.separator}></div>
                             <div className={style.moduleStatusCont}>
                                 {users.map((user) => (
-                                    <div className={style.moduleStatusCont2} key={user._id}>
-                                        <div className={style.accountPreview}>
-                                            <AccountPreview user={user} />
+                                    <div key={user._id}>
+                                        <div
+                                            className={style.moduleStatusCont2}
+                                            onClick={() => handleUserSelect(user._id)}
+                                            style={{ cursor: "pointer" }}
+                                        >
+                                            <div className={style.accountPreview}>
+                                                <AccountPreview user={user} />
+                                            </div>
+                                            <div className={style.userName}>
+                                                {user.name}
+                                            </div>
+                                            <div className={style.moduleStatus}>
+                                                <CourseStatus user={user} modules={modules} />
+                                            </div>
                                         </div>
-                                        <div className={style.userName}>
-                                            {user.name}
-                                        </div>
-                                        <div className={style.moduleStatus}>
-                                            <CourseStatus user={user} modules={modules} />
-                                        </div>
+                                        {selectedUserId === user._id && (
+                                            <div className={style.userResults}>
+                                                <ResultsView userId={user._id} />
+                                            </div>
+                                        )}
                                     </div>
                                 ))}
                             </div>
