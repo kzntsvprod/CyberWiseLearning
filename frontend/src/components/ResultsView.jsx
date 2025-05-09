@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useQuiz } from "../contexts/QuizContext";
 import { useModule } from "../contexts/ModuleContext";
-import { useUser } from "../contexts/UserContext";
 import style from "../style/ResultsView.module.css";
 
-const ResultsView = () => {
-    const { user } = useUser();
+const ResultsView = ({ userId }) => {
     const { modules } = useModule();
     const { userResults, resultsLoading, fetchUserResults } = useQuiz();
-    const [selectedModule, setSelectedModule] = useState("");
+    const [selectedModule, setSelectedModule] = useState(modules[0]?._id || "");
 
     useEffect(() => {
-        if (user?._id) {
-            fetchUserResults(user._id, selectedModule || null);
+        if (userId) {
+            fetchUserResults(userId, selectedModule);
         }
-    }, [user?._id, selectedModule, fetchUserResults]);
+    }, [userId, selectedModule, fetchUserResults]);
 
     const handleModuleChange = (e) => {
         setSelectedModule(e.target.value);
@@ -31,7 +29,6 @@ const ResultsView = () => {
                     value={selectedModule}
                     onChange={handleModuleChange}
                 >
-                    <option value="">Всі модулі</option>
                     {modules.map(module => (
                         <option key={module._id} value={module._id}>
                             {module.title}

@@ -49,15 +49,17 @@ const Header = (props) => {
 
             {props.showMenu && (
                 <>
-                    <div className={style.searchBar}>
-                        <FaSearch className={style.searchIcon} />
-                        <input
-                            type="text"
-                            value={searchQuery}
-                            onChange={handleSearchChange}
-                            placeholder="Пошук модулів..."
-                        />
-                    </div>
+                    {props.showSearch && (
+                        <div className={style.searchBar}>
+                            <FaSearch className={style.searchIcon} />
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={handleSearchChange}
+                                placeholder="Пошук модулів..."
+                            />
+                        </div>
+                    )}
 
                     <div className={style.icons}>
                         <button className={style.iconButton} onClick={handleMainClick}>
