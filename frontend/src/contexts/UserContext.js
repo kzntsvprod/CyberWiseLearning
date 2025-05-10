@@ -189,6 +189,7 @@ export const UserProvider = ({ children }) => {
             updateUser,
             updateAvatar,
             fetchAllUsers,
+            getToken,
             isAdmin: user?.role === 'admin'
         }}>
             {children}

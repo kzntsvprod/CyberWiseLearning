@@ -15,6 +15,7 @@ import EmailGame from "./EmailGame";
 import AdminPage from "./AdminPage";
 import Quiz from "./Quiz";
 import {QuizProvider} from "./contexts/QuizContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function Paths() {
   return (
@@ -24,17 +25,20 @@ function Paths() {
                 <ModuleProvider>
                     <Router>
                         <Routes>
-                            <Route path="/" element={<LoginPage />} />
+                            <Route path={"/"} element={<LoginPage />} />
                             <Route path={"/register"} element={<RegisterPage />} />
-                            <Route path={"/main"} element={<MainPage />} />
-                            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                            <Route path={"/forgot-password"} element={<ForgotPasswordPage />} />
                             <Route path={"/reset-password/:token"} element={<ResetPasswordPage />} />
-                            <Route path={"/learn/:id"} element={<LearnPage />} />
-                            <Route path={"/user"} element={<UserPage />} />
-                            <Route path={"/game/password"} element={<PassGame/>} />
-                            <Route path={"/game/email"} element={<EmailGame/>} />
-                            <Route path={"/admin"} element={<AdminPage />} />
-                            <Route path={"/quiz/:id"} element={<Quiz />} />
+
+                            <Route element={<ProtectedRoute />}>
+                                <Route path={"/main"} element={<MainPage />} />
+                                <Route path={"/learn/:id"} element={<LearnPage />} />
+                                <Route path={"/user"} element={<UserPage />} />
+                                <Route path={"/game/password"} element={<PassGame />} />
+                                <Route path={"/game/email"} element={<EmailGame />} />
+                                <Route path={"/admin"} element={<AdminPage />} />
+                                <Route path={"/quiz/:id"} element={<Quiz />} />
+                            </Route>
                         </Routes>
                     </Router>
                 </ModuleProvider>
