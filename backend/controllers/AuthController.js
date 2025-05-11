@@ -143,7 +143,7 @@ export const forgotPassword = async (req, res) => {
             }
         });
 
-        const resetUrl = "https://cyberwiselearning.onrender.com/reset-password/${token}";
+        const resetUrl = `https://cyberwiselearning.onrender.com/reset-password/${token}`;
 
         const mailOptions = {
             from: `"CyberWise Learning" <${process.env.GMAIL_USER}>`,
