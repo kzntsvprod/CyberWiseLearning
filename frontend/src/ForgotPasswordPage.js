@@ -15,6 +15,8 @@ function ForgotPasswordPage() {
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
     const handleResetRequest = async () => {
         try {
             if(!email) {
@@ -22,7 +24,7 @@ function ForgotPasswordPage() {
                 return;
             }
 
-            const response = await fetch("http://localhost:5000/api/auth/forgot-password", {
+            const response = await fetch(`${BACKEND_URL}/api/auth/forgot-password`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email })

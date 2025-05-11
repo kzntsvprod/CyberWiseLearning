@@ -18,6 +18,8 @@ function LoginPage() {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
     useEffect(() => {
         // Перевірка наявності токена у localStorage при завантаженні сторінки
         const savedToken = localStorage.getItem('token');
@@ -33,7 +35,7 @@ function LoginPage() {
                 return;
             }
 
-            const response = await fetch("http://localhost:5000/api/auth/login", {
+            const response = await fetch(`${BACKEND_URL}/api/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -11,6 +11,8 @@ export const UserProvider = ({ children }) => {
     const [loadingUsers, setLoadingUsers] = useState(true);
     const [errorUsers, setErrorUsers] = useState(null);
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
     const getToken = () => {
         return localStorage.getItem('token') || sessionStorage.getItem('token');
     };
@@ -36,7 +38,7 @@ export const UserProvider = ({ children }) => {
         setUser(null);
         if (user?._id) {
             try {
-                await fetch(`http://localhost:5000/api/user/${user._id}/status`, {
+                await fetch(`${BACKEND_URL}/api/user/${user._id}/status`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ isOnline: false }),
@@ -63,7 +65,7 @@ export const UserProvider = ({ children }) => {
                 throw new Error('Токен протерміновано');
             }
 
-            const response = await fetch('http://localhost:5000/api/auth/data', {
+            const response = await fetch(`${BACKEND_URL}/api/auth/data`, {
                 headers: { 'Authorization': token }
             });
 
@@ -74,7 +76,7 @@ export const UserProvider = ({ children }) => {
             const data = await response.json();
             setUser(data.user);
 
-            await fetch(`http://localhost:5000/api/user/${data.user._id}/status`, {
+            await fetch(`${BACKEND_URL}/api/user/${data.user._id}/status`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ isOnline: true }),
@@ -92,7 +94,7 @@ export const UserProvider = ({ children }) => {
             const token = getToken();
             if (!token) throw new Error('Токен не знайдено');
 
-            const response = await fetch('http://localhost:5000/api/user/update', {
+            const response = await fetch(`${BACKEND_URL}/api/user/update`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -122,7 +124,7 @@ export const UserProvider = ({ children }) => {
             const formData = new FormData();
             formData.append('avatar', file);
 
-            const response = await fetch('http://localhost:5000/api/user/avatar', {
+            const response = await fetch(`${BACKEND_URL}/api/user/avatar`, {
                 method: 'POST',
                 headers: {
                     'Authorization': token
@@ -147,7 +149,7 @@ export const UserProvider = ({ children }) => {
         setErrorUsers(null);
 
         try {
-            const response = await fetch("http://localhost:5000/api/user/users");
+            const response = await fetch(`${BACKEND_URL}/api/user/users`);
 
             if (!response.ok) {
                 throw new Error("Failed to fetch users");

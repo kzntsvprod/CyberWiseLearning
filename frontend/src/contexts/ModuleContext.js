@@ -12,8 +12,10 @@ export const ModuleProvider = ({ children }) => {
     const [moduleLoading, setModuleLoading] = useState(false);
     const [moduleError, setModuleError] = useState(null);
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
     useEffect(() => {
-        fetch("http://localhost:5000/api/modules/data")
+        fetch(`${BACKEND_URL}/api/modules/data`)
             .then((res) => {
                 if (!res.ok) throw new Error("Network error");
                 return res.json();
@@ -35,7 +37,7 @@ export const ModuleProvider = ({ children }) => {
     const setModuleById = (id) => {
         setModuleLoading(true);
         setModule(null);
-        fetch(`http://localhost:5000/api/modules/data/${id}`)
+        fetch(`${BACKEND_URL}/api/modules/data/${id}`)
             .then((res) => {
                 if (!res.ok) throw new Error("Module not found");
                 return res.json();

@@ -18,6 +18,8 @@ function RegisterPage() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
     const validatePassword = (password) => {
         const minLength = 8;
         const hasNumber = /\d/.test(password);
@@ -44,7 +46,7 @@ function RegisterPage() {
                 return;
             }
 
-            const response = await fetch("http://localhost:5000/api/auth/register", {
+            const response = await fetch(`${BACKEND_URL}/api/auth/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

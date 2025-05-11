@@ -13,13 +13,15 @@ export const QuizProvider = ({ children }) => {
     const [resultsLoading, setResultsLoading] = useState(false);
     const [selectedModuleResults, setSelectedModuleResults] = useState(null);
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
     const fetchQuiz = useCallback((moduleId) => {
         setLoading(true);
         setQuestions([]);
         setError(null);
         setSubmitted(false);
         setResult(null);
-        fetch(`http://localhost:5000/api/quiz/questions?moduleId=${moduleId}`)
+        fetch(`${BACKEND_URL}/api/quiz/questions?moduleId=${moduleId}`)
             .then(res => {
                 if (!res.ok) throw new Error("Error fetching questions");
                 return res.json();
@@ -43,7 +45,7 @@ export const QuizProvider = ({ children }) => {
         setResultsLoading(true);
         setError(null);
         try {
-            let url = `http://localhost:5000/api/quiz/results?userId=${userId}`;
+            let url = `${BACKEND_URL}/api/quiz/results?userId=${userId}`;
             if (moduleId) url += `&moduleId=${moduleId}`;
 
             const res = await fetch(url);
@@ -67,7 +69,7 @@ export const QuizProvider = ({ children }) => {
     const checkQuizCompletion = useCallback(async (userId, moduleId) => {
         try {
             const res = await fetch(
-                `http://localhost:5000/api/quiz/check-completion?userId=${userId}&moduleId=${moduleId}`
+                `${BACKEND_URL}/api/quiz/check-completion?userId=${userId}&moduleId=${moduleId}`
             );
             if (!res.ok) throw new Error("Error checking quiz completion");
             const data = await res.json();
@@ -96,7 +98,7 @@ export const QuizProvider = ({ children }) => {
         const orderedAnswers = questions.map((q, index) => answers[index] ?? (q.questionType === "multiple" ? [] : null));
 
         try {
-            const res = await fetch("http://localhost:5000/api/quiz/submit", {
+            const res = await fetch(`${BACKEND_URL}/api/quiz/submit`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

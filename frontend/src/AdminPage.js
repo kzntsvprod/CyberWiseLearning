@@ -25,6 +25,8 @@ function AdminPage() {
     const [newPassword, setNewPassword] = useState("");
     const [selectedUserId, setSelectedUserId] = useState(null);
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
     if (!user) return <div>Будь ласка, увійдіть у систему</div>;
 
     const handleEditClick = (field) => {
@@ -57,7 +59,7 @@ function AdminPage() {
                 return;
             }
 
-            const response = await fetch("http://localhost:5000/api/user/reset-password", {
+            const response = await fetch(`${BACKEND_URL}/api/user/reset-password`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

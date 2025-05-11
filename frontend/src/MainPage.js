@@ -16,9 +16,11 @@ function MainPage() {
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredModules, setFilteredModules] = useState(modules);
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
     const handleModuleClick = async (modId) => {
         try {
-            const response = await fetch("http://localhost:5000/api/user/view-module", {
+            const response = await fetch(`${BACKEND_URL}/api/user/view-module`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

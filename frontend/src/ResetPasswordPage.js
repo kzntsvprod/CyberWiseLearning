@@ -15,6 +15,8 @@ function ResetPasswordPage() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
     const validatePassword = (password) => {
         const minLength = 8;
         const hasNumber = /\d/.test(password);
@@ -34,7 +36,7 @@ function ResetPasswordPage() {
                 return;
             }
 
-            const response = await fetch(`http://localhost:5000/api/auth/reset-password/${token}`, {
+            const response = await fetch(`${BACKEND_URL}/api/auth/reset-password/${token}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
