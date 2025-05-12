@@ -132,11 +132,12 @@ export const UserProvider = ({ children }) => {
                 body: formData
             });
 
+            const data = await response.json();
+
             if (!response.ok) {
-                throw new Error('Помилка завантаження аватарки');
+                throw new Error(data.message || 'Помилка завантаження аватарки');
             }
 
-            const data = await response.json();
             setUser(prev => ({ ...prev, avatar: data.avatar }));
         } catch (err) {
             setError(err.message);

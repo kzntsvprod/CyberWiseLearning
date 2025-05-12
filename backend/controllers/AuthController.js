@@ -8,7 +8,8 @@ const validatePassword = (password) => {
     const minLength = 8;
     const hasNumber = /\d/.test(password);
     const hasLetter = /[a-zA-Z]/.test(password);
-    return password.length >= minLength && hasNumber && hasLetter;
+    const noSpaces = !/\s/.test(password);
+    return password.length >= minLength && hasNumber && hasLetter && noSpaces;
 };
 
 export const register = async (req, res) => {
@@ -16,13 +17,11 @@ export const register = async (req, res) => {
         const { email, password } = req.body;
 
         if(!password) {
-            alert("Введіть свої дані!");
-            return;
+            return res.status(400).json({ message: "Введіть свої дані!" });
         }
 
         if(!email) {
-            alert("Введіть свої дані!");
-            return;
+            return res.status(400).json({ message: "Введіть свої дані!" });
         }
 
         // Валідація email
@@ -31,8 +30,7 @@ export const register = async (req, res) => {
         }
 
         if (!validatePassword(password)) {
-            alert("Пароль має містити не менше 8 символів, включати цифри та літери.");
-            return;
+            return res.status(401).json({ message: "Пароль має містити не менше 8 символів, включати цифри та літери та не містити пробілів." });
         }
 
         // Перевірка, чи існує такий користувач
@@ -58,13 +56,11 @@ export const login = async (req, res) => {
         const { email, password } = req.body;
 
         if(!password) {
-            alert("Введіть свої дані!");
-            return;
+            return res.status(400).json({ message: "Введіть свої дані!" });
         }
 
         if(!email) {
-            alert("Введіть свої дані!");
-            return;
+            return res.status(400).json({ message: "Введіть свої дані!" });
         }
 
         // Перевірка, чи є користувач
@@ -112,8 +108,7 @@ export const forgotPassword = async (req, res) => {
         const { email } = req.body;
 
         if(!email) {
-            alert("Введіть адресу електронної пошти!");
-            return;
+            return res.status(400).json({ message: "Введіть адресу електронної пошти!" });
         }
 
         // Валідація email
@@ -175,13 +170,11 @@ export const resetPassword = async (req, res) => {
         const { password } = req.body;
 
         if (!password) {
-            alert("Будь ласка, введіть новий пароль");
-            return;
+            return res.status(400).json({ message: "Будь ласка, введіть новий пароль" });
         }
 
         if (!validatePassword(password)) {
-            alert("Пароль має містити не менше 8 символів, включати цифри та літери.");
-            return;
+            return res.status(401).json({ message: "Пароль має містити не менше 8 символів, включати цифри та літери та не містити пробілів." });
         }
 
         console.log("Received token:", token); // Логування для дебагінгу

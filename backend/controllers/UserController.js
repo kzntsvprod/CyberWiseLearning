@@ -10,7 +10,8 @@ const validatePassword = (password) => {
     const minLength = 8;
     const hasNumber = /\d/.test(password);
     const hasLetter = /[a-zA-Z]/.test(password);
-    return password.length >= minLength && hasNumber && hasLetter;
+    const noSpaces = !/\s/.test(password);
+    return password.length >= minLength && hasNumber && hasLetter && noSpaces;
 };
 
 export const updateUser = async (req, res) => {
@@ -19,8 +20,12 @@ export const updateUser = async (req, res) => {
         const user = await User.findById(req.userId);
         if (!user) return res.status(404).json({ message: "Користувача не знайдено" });
 
-        if (name !== undefined) user.name = name;
-        if (email !== undefined) user.email = email;
+        if (name !== undefined) {
+            if (typeof name !== "string" || name.trim() === "") {
+                return res.status(400).json({ message: "Ім'я не може бути порожнім" });
+            }
+            user.name = name;
+        }
 
         if (email !== undefined) {
             if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
@@ -57,6 +62,12 @@ export const uploadAvatar = async (req, res) => {
 
         if (!req.file) return res.status(400).json({ message: "Файл не надано" });
 
+        // Перевірка розміру фото
+        const maxSize = 4 * 1024 * 1024;
+        if (req.file.size > maxSize) {
+            return res.status(400).json({ message: "Розмір файлу перевищує 4 МБ" });
+        }
+
         // Конвертація буфера в Base64
         const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
 
@@ -87,7 +98,7 @@ export const resetPassword = async (req, res) => {
         }
 
         if (!validatePassword(newPassword)) {
-            return res.status(401).json({ message: "Пароль має містити не менше 8 символів, включати цифри та літери." });
+            return res.status(401).json({ message: "Пароль має містити не менше 8 символів, включати цифри та літери та не містити пробілів." });
         }
 
         const hashedNewPassword = await bcrypt.hash(newPassword, 10);
