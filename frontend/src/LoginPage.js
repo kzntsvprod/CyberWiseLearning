@@ -18,7 +18,7 @@ function LoginPage() {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
 
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
     useEffect(() => {
         // Перевірка наявності токена у localStorage при завантаженні сторінки

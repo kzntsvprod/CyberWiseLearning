@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
     const [loadingUsers, setLoadingUsers] = useState(true);
     const [errorUsers, setErrorUsers] = useState(null);
 
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
     const getToken = () => {
         return localStorage.getItem('token') || sessionStorage.getItem('token');

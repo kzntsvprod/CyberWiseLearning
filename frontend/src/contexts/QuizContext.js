@@ -13,7 +13,7 @@ export const QuizProvider = ({ children }) => {
     const [resultsLoading, setResultsLoading] = useState(false);
     const [selectedModuleResults, setSelectedModuleResults] = useState(null);
 
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
     const fetchQuiz = useCallback((moduleId) => {
         setLoading(true);

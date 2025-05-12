@@ -12,7 +12,7 @@ export const ModuleProvider = ({ children }) => {
     const [moduleLoading, setModuleLoading] = useState(false);
     const [moduleError, setModuleError] = useState(null);
 
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
     useEffect(() => {
         fetch(`${BACKEND_URL}/api/modules/data`)

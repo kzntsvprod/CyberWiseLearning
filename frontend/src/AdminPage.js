@@ -25,7 +25,7 @@ function AdminPage() {
     const [newPassword, setNewPassword] = useState("");
     const [selectedUserId, setSelectedUserId] = useState(null);
 
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
     if (!user) return <div>Будь ласка, увійдіть у систему</div>;
 
